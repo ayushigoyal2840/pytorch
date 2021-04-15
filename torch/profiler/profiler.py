@@ -64,6 +64,7 @@ def tensorboard_trace_handler(dir_name: str, worker_name: Optional[str] = None):
     import time
 
     def handler_fn(prof) -> None:
+        print("DEBUG: in tensorboard_trace_handler handler_fn")
         nonlocal worker_name
         if not os.path.isdir(dir_name):
             try:
@@ -73,6 +74,7 @@ def tensorboard_trace_handler(dir_name: str, worker_name: Optional[str] = None):
         if not worker_name:
             worker_name = "{}_{}".format(socket.gethostname(), str(os.getpid()))
         file_name = "{}.{}.pt.trace.json".format(worker_name, int(time.time() * 1000))
+        print("DEBUG:     dir_name = ", dir_name, " , file_name = ", file_name, " , prof.step = ", prof.step)
         prof.export_chrome_trace(os.path.join(dir_name, file_name))
     return handler_fn
 

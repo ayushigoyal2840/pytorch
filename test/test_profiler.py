@@ -505,8 +505,10 @@ class TestProfiler(TestCase):
                     p.step()
 
             self.assertTrue(os.path.exists(dname))
+            print("DEBUG: dname = ", dname)
             file_num = 0
             for file_name in os.listdir(dname):
+                print("DEBUG:    file_name = ", file_name)
                 parts = file_name.split('.')
                 self.assertTrue(len(parts) > 4)
                 self.assertTrue(parts[-4].isdigit() and int(parts[-4]) > 0, "Wrong tracing file name pattern")
